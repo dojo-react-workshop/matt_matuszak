@@ -1,25 +1,27 @@
-
-const Person = function(name) {
+class Person {
+  constructor(name) {
     this.name = name;
     this.distanceTraveled = 0;
-    this.sayName = function() {
-        console.log(this.name);
-    }
-    this.saySomething = function(text) {
-        console.log(`${this.name} says '${text}'`)
-    }
-    this.walk = function(distance = 3) {
-        this.distanceTraveled += distance;
-        console.log(`${this.name} is walking.`);
-    }
-    this.run = function(distance = 10) {
-        this.distanceTraveled += distance;
-        console.log(`${this.name} is running.`);
-    }
-    this.crawl = function(distance = 1) {
-        this.distanceTraveled += distance;
-        console.log(`${this.name} is crawling.`);
-    }
+  }
+
+  sayName() {
+    console.log(this.name);
+  }
+  saySomething(text) {
+    console.log(`${this.name} says '${text}'`)
+  }
+  walk(distance = 3) {
+    this.distanceTraveled += distance;
+    console.log(`${this.name} is walking.`);
+  }
+  run(distance = 10) {
+    this.distanceTraveled += distance;
+    console.log(`${this.name} is running.`);
+  }
+  crawl(distance = 1) {
+    this.distanceTraveled += distance;
+    console.log(`${this.name} is crawling.`);
+  }
 }
 
 let person = new Person('Jack');
@@ -31,37 +33,38 @@ person.run();
 person.crawl();
 console.log(person.distanceTraveled);
 
-const BELTS = ['white','yellow','green','red','brown','black'];
+const BELTS = ['white', 'yellow', 'green', 'red', 'brown', 'black'];
 
-const Ninja = function(name, cohert, beltLevel) {
+class Ninja {
+  constructor(name, cohert, beltLevel) {
     this.name = name;
     this.cohert = cohert;
-    this.beltLevel = (beltLevel > BELTS.length) ? BELTS.length-1 : beltLevel;
+    this.beltLevel = (beltLevel > BELTS.length) ? BELTS.length - 1 : beltLevel;
+  }
+  beltUp() {
+    this.beltLevel = (this.beltLevel < BELTS.length - 1) ? this.beltLevel + 1 : this.beltLevel;
+  }
 
-    this.beltUp = function() {
-        this.beltLevel = (this.beltLevel < BELTS.length-1) ? this.beltLevel+1 : this.beltLevel;
-    }
-
-    this.getDetails = function() {
-        return (`${name} is at belt ${BELTS[this.beltLevel]}`)
-    }
+  getDetails() {
+    return (`${this.name} is at belt ${BELTS[this.beltLevel]}`)
+  }
 }
 
-
-const ninjas =
-    [
-        new Ninja('Mark', 'unknown', 0)
-        , new Ninja('Amy', 'unknown', 5)
-        , new Ninja('John', 'unknown', 2)
-        , new Ninja('Berry', 'unknown', 9)
-        , new Ninja('Brook', 'unknown', BELTS.length-1)
-    ];
+const ninjasItterable = {};
+ninjasItterable[Symbol.iterator] = function* () {
+    yield new Ninja('Mark', 'unknown', 0)
+    yield new Ninja('Amy', 'unknown', 5)
+    yield new Ninja('John', 'unknown', 2)
+    yield new Ninja('Berry', 'unknown', 9)
+    yield new Ninja('Brook', 'unknown', BELTS.length - 1)
+}
 
 for (let beltIndex = 0; beltIndex < BELTS.length; beltIndex++) {
-    for (var ninjaIndex = 0; ninjaIndex < ninjas.length; ninjaIndex++) {
-        console.log(`before beltUp:${ninjas[ninjaIndex].getDetails()}`);
-        ninjas[ninjaIndex].beltUp();
-        console.log(`After beltUp:${ninjas[ninjaIndex].getDetails()}`);
 
+    for(let ninja of ninjasItterable) {
+          console.log(`before beltUp:${ninja.getDetails()}`);
+          ninja.beltUp();
+          console.log(`After beltUp:${ninja.getDetails()}`);
     }
+
 }
