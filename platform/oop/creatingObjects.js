@@ -1,6 +1,6 @@
-function Vehical() {
+function Vehical(name, numberofWheels, numberOfPassengers) {
 
-    var vehicalInstance = {};
+    var vehicalInstance = { name: name, numberofWheels: numberofWheels, numberOfPassengers: numberOfPassengers };
 
     vehicalInstance.makeNoise = function() {
         console.log('HONK, HONK');
@@ -10,18 +10,17 @@ function Vehical() {
 }
 
 
-let bike = Vehical();
-
+let bike = Vehical('bike', 2, 1);
 bike.makeNoise();
 bike.makeNoise = function() { console.log('RING, RING'); }
 bike.makeNoise();
 
-let sedan = Vehical();
+let sedan = Vehical('sedan', 4, 5);
 sedan.makeNoise();
 sedan.makeNoise = function() { console.log('Honk, Honk'); }
 sedan.makeNoise();
 
-let bus = Vehical();
+let bus = Vehical('bus', 4, 20);
 bus.passengerCount = 0;
 bus.addPassengers = function(num) { this.passengerCount += num; }
 bus.addPassengers(5);
