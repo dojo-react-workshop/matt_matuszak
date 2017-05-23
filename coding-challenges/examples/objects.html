@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Objects</title>
+    </head>
+    <body>
+
+        <script type="text/javascript">
+            console.log('loaded javascript!!');
+
+            function VehicalViaObjectLiteral(make, model, year) {
+                // const vehicle = {};
+                // vehicle.make = make;
+                // vehicle.model = model;
+                // vehicle.year = year;
+
+                const vehicle = {
+                    make: make
+                    , model: model
+                    , year: year
+                };
+
+                return vehicle;
+            }
+
+            const hondaCivic = VehicalViaObjectLiteral('honda', 'civic', 2002);
+            const hondaPilot = VehicalViaObjectLiteral('honda', 'pilot', 2013);
+
+            console.log(hondaCivic);
+            console.log(hondaPilot);
+
+
+            function VehicalViaFunction(make, model, year) {
+                this.make = make;
+                this.model = model;
+                this.year = year;
+            }
+
+
+        </script>
+
+
+    </body>
+</html>
