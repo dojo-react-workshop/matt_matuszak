@@ -59,13 +59,14 @@ class Dealer {
     }
 
     deal(players) {
-        // players.forEach(function(player) {
-        //     player.take(this.deck.pop());
-        // })
+        players.forEach(function(player) {
+            player.take(this.liveDeck.pop());
+        }, this)
             // seems ood that the function cannot access the deck from the constructor of the class
-        for (var i = 0; i < players.length; i++) {
-            players[i].take(this.liveDeck.pop());
-        }
+            // notice the ", this param"
+        // for (var i = 0; i < players.length; i++) {
+        //     players[i].take(this.liveDeck.pop());
+        // }
 
         return this;
     }
