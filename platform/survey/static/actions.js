@@ -18,19 +18,6 @@ $(document).ready(() => {
             $('#languageText').text(responseData.language);
             $('#commentsText').text(responseData.comments);
             $('#timestampText').text(new Date(responseData.created).toLocaleTimeString());
-            $('#surveyFormPanel').fadeToggle(1000);
-            setTimeout(() => {
-                $('#surveySuccessfulAdd').fadeToggle(1000);
-            }, 1000)
         }, 'json');
     });
-
-    $('#goBack').click(()=> {
-        $('#surveySuccessfulAdd').fadeToggle(1000);
-        setTimeout(() => {
-            $('#surveyFormPanel').fadeToggle(1000);
-        }, 1000)
-    });
-
-
 })
