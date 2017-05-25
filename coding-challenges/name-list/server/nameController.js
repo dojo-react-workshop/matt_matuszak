@@ -17,5 +17,12 @@ Name.prototype.add = function(request, response) {
     response.json(name);
 }
 
+Name.prototype.all = function(request, response) {
+    console.log('in all of name')
+    response.json(names);
+    console.log(names);
+}
+
+
 
 module.exports = new Name();
