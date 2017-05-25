@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Survey</title>
+
+    <style media="screen">
+        #surveySuccessfulAdd {
+            display: none;
+            max-width: 50%;
+            margin: auto;
+        }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="./actions.js">
+    </script>
+
+    <div id class="container">
+        <div id="surveyFormPanel" class="panel panel-default">
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Your Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="location" class="col-sm-2 control-label">Dojo Location</label>
+                        <div class="col-sm-10">
+                            <select id="location" class="form-control">
+                                <option>Milwaukee</option>
+                                <option>Waukesha</option>
+                                <option>Brookfield</option>
+                                <option>Stallis</option>
+                                <option>New Berlin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="language" class="col-sm-2 control-label">Dojo Location</label>
+                        <div class="col-sm-10">
+                            <select id="language" class="form-control">
+                                <option>Java</option>
+                                <option>Python</option>
+                                <option>Fortran</option>
+                                <option>Cobol</option>
+                                <option>JavaScript</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="comments" class="col-sm-2 control-label">Comments</label>
+                        <div class="col-sm-10">
+                            <textarea id="comments" class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        &nbsp;
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button id="submit" type="button" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div id="surveySuccessfulAdd" class="panel panel-success">
+            <div class="panel-body">
+                <h4>Submitted Information</h4>
+                <div class="row">
+                    <div class="col-md-4"><p>Name</p></div>
+                    <div class="col-md-8"><p id="nameText"></p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><p>Dojo Location</p></div>
+                    <div class="col-md-8"><p id="locationText"></p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><p>Favorite Language</p></div>
+                    <div class="col-md-8"><p id="languageText"></p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><p>Comments</p></div>
+                    <div class="col-md-8"><p id="commentsText"></p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><p>Timestamp</p></div>
+                    <div class="col-md-8"><p id="timestampText"></p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><p>&nbsp;</p></div>
+                    <div class="col-md-8">
+                        <button id="goBack" type="button" class="btn btn-primary">Go Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
