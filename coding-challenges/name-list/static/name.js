@@ -7,7 +7,7 @@ $(document).ready(() => {
         })
       })
     } loadNames();
-    $(`#namesForm`).submit(false)
+
     $(`#submitButton`).click(function(){
       if ($("#nameInput").val()){
         let submittedName = {
@@ -18,6 +18,7 @@ $(document).ready(() => {
           $("#nameList").append(`<tr><td>${res.name}</td></tr>`)
           $("#nameInput").val("")
         })
+        $(`#namesForm`).submit(false)
       }
     })
 })
