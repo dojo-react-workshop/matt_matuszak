@@ -12,18 +12,6 @@ $(document).ready(() => {
         }
         console.log('form data-->', formData);
 
-
-        http({
-            url: '/api/v1/test',
-            method: 'post',
-            data: {
-                firstName: 'Fred',
-                lastName: 'Flintstone'
-            }
-        }).then((response) => {
-            console.log('TEST RESPONSE -->', response);
-        })
-
         http.post('/api/v1/survey', formData)
             .then(function(response) {
                 console.log('my response-->', response);
@@ -34,23 +22,10 @@ $(document).ready(() => {
                 $('#languageText').text(responseData.language);
                 $('#commentsText').text(responseData.comments);
                 $('#timestampText').text(new Date(responseData.created).toLocaleTimeString());
-                $('#surveyFormPanel').fadeToggle(1000);
-                setTimeout(() => {
-                    $('#surveySuccessfulAdd').fadeToggle(1000);
-                }, 1000)
             })
             .catch(function(error) {
                 console.log(error);
             });
 
     });
-
-    $('#goBack').click(() => {
-        $('#surveySuccessfulAdd').fadeToggle(1000);
-        setTimeout(() => {
-            $('#surveyFormPanel').fadeToggle(1000);
-        }, 1000)
-    });
-
-
 })
