@@ -8,11 +8,12 @@
     </script>
     <script type="text/javascript" src="./node_modules/react-dom/dist/react-dom.js">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
 </head>
 
 <body>
     <div id="container"> </div>
-    <script type="text/javascript">
+    <script type="text/babel">
         'use strict';
 
         const container = document.getElementById('container');
@@ -22,10 +23,16 @@
         const SquareContainer = (props) => {
             console.log(props);
             const squares = props.squares.map((squareProps, index) => {
-                return React.createElement(Square, {key: index, colors: squareProps});
+                return (
+                    <Square key={index} colors={squareProps}></Square>
+                );
             })
 
-            return React.createElement('div', null, squares);
+            return (
+                <div>
+                {squares}
+                </div>
+            )
         }
 
 
@@ -44,14 +51,17 @@
                 , fontSize: '35px'
             }
 
-            return React.createElement('div', { style: style }, textToUse)
+            return (
+                <div style={style}>
+                    {textToUse}
+                </div>
+            );
         }
 
 
         ReactDOM.render(
-                React.createElement(
-                    SquareContainer
-                    , { squares: squares }
+                (
+                    <SquareContainer squares={squares}></SquareContainer>
                 )
                 , container
         );
