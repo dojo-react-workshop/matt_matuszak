@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Composable Square</title>
+    <script type="text/javascript" src="./node_modules/react/dist/react.js">
+    </script>
+    <script type="text/javascript" src="./node_modules/react-dom/dist/react-dom.js">
+    </script>
+</head>
+
+<body>
+    <div id="container"> </div>
+    <script type="text/javascript">
+        'use strict';
+
+        const container = document.getElementById('container');
+
+        const squares = [{ bgColor: 'blue', textColor: 'white' }, { bgColor: 'red', textColor: 'blue' }, { bgColor: 'pink', textColor: 'green' }];
+
+        const SquareContainer = (props) => {
+            console.log(props);
+            const squares = props.squares.map((squareProps, index) => {
+                return React.createElement(Square, {key: index, colors: squareProps});
+            })
+
+            return React.createElement('div', null, squares);
+        }
+
+
+        const Square = (props) => {
+            const {bgColor} = props.colors;
+            const {textColor} = props.colors;
+            const textToUse = `${textColor} on ${bgColor}`;
+
+
+            const style = {
+                height: '250px'
+                , width: '250px'
+                , backgroundColor: bgColor
+                , color: textColor
+                , display: 'inline-block'
+                , fontSize: '35px'
+            }
+
+            return React.createElement('div', { style: style }, textToUse)
+        }
+
+
+        ReactDOM.render(
+                React.createElement(
+                    SquareContainer
+                    , { squares: squares }
+                )
+                , container
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
