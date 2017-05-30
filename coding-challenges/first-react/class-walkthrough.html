@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Try this</title>
+    <script type="text/javascript" src="./node_modules/react/dist/react.js">
+    </script>
+    <script type="text/javascript" src="./node_modules/react-dom/dist/react-dom.js">
+    </script>
+    <style media="screen">
+        .demo {
+            border: 1px solid #ccc;
+            margin: 1em;
+            padding: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="js"> </div>
+    <div id="react"> </div>
+    <script type="text/javascript">
+        const jsContainer = document.getElementById("js");
+
+        function renderJS() {
+
+            jsContainer.innerHTML = `
+            <div class="demo">
+            Hello JS
+            <input />
+            <p>
+            ${new Date()}
+            </p>
+            </div>
+            `;
+        }
+
+        setInterval(renderJS, 1000);
+
+        const reactContainer = document.getElementById("react");
+        function renderReact() {
+
+            ReactDOM.render(
+                React.createElement
+                (
+                    'div'
+                    , { className: 'demo' }
+                    , 'Hello React'
+                    , React.createElement('input')
+                    , React.createElement('p', null, `${new Date()}`)
+                )
+                , reactContainer
+            );
+        }
+
+        setInterval(renderReact, 1000);
+    </script>
+</body>
+
+</html>
