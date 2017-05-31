@@ -1,0 +1,26 @@
+.rootAppContainer {
+    margin-top: 20px;
+}
+
+.jsLibraryContainer {
+    max-width: 40%;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.libraryRow {
+    border-bottom: 1px solid black;
+}
+
+.counter {
+    /*border: 1px solid black;*/
+    border-radius: 50px;
+    /*max-width: 50px;*/
+    /*max-height: 50px;*/
+    /*vertical-align: middle;*/
+}
+
+.libraryName {
+    max-width: 200px;
+}
