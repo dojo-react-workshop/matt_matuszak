@@ -17,13 +17,14 @@
                 margin: auto;
             }
             .jsLibraryContainer {
-                /*max-width: 700px;*/
-                /*border-top: 1px solid black;
+                max-width: 60%;
+                /*border: 1px solid black;*/
+                border-top: 1px solid black;
                 border-right: 1px solid black;
-                border-left: 1px solid black;*/
+                border-left: 1px solid black;
             }
-            .row {
-                /*border-bottom: 1px solid black;*/
+            .libraryRow {
+                border-bottom: 1px solid black;
             }
             /*.jsLibrary{
                 border: 1px solid red;
@@ -53,14 +54,14 @@
                     , fontSize: '2em'
                 }
                 return (
-                    <div className="row">
-                        <div className="small-4 columns text-right cell-props padding-vert-large">
+                    <div className="row libraryRow">
+                        <div className="small-4 columns text-center cell-props padding-vert-large">
                         0
                         </div>
                         <div className="small-4 columns text-left cell-props padding-vert-large">
-                            {props.libProps.name}
+                            <h4>{props.libProps.name}</h4>
                         </div>
-                        <div className="small-4 columns text-left cell-props padding-vert-small">
+                        <div className="small-4 columns text-center cell-props padding-vert-small">
                             <span className="icon icon-add" style={plusStyle}></span>
                         </div>
                     </div>
