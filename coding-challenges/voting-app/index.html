@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Voting App</title>
+        <script type="text/javascript" src="./node_modules/react/dist/react.js">
+        </script>
+        <script type="text/javascript" src="./node_modules/react-dom/dist/react-dom.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+        <link rel="stylesheet" href="https://uitk.learnvest.com/v/1.16.0/css/nm/fonts.css" />
+        <link rel="stylesheet" href="https://uitk.learnvest.com/v/1.16.0/css/nm/icons.css" />
+        <link rel="stylesheet" href="https://uitk.learnvest.com/v/1.16.0/css/nm/main.css" />
+        <style media="screen">
+            .container {
+                max-width: 900px;
+                margin: auto;
+            }
+            .jsLibraryContainer {
+                /*max-width: 700px;*/
+                /*border-top: 1px solid black;
+                border-right: 1px solid black;
+                border-left: 1px solid black;*/
+            }
+            .row {
+                /*border-bottom: 1px solid black;*/
+            }
+            /*.jsLibrary{
+                border: 1px solid red;
+            }
+            .jsLibrary p{
+                display: inline;
+            }
+            .jsLibraryContainer {
+                border: 1px solid black;
+            }*/
+        </style>
+    </head>
+    <body>
+
+        <div id="container" class="container"> </div>
+
+        <script type="text/babel">
+            'use strict';
+
+            const container = document.getElementById('container');
+            const jsLibraries = [{name: 'React'}, {name: 'Vue'}, {name: 'Angular'}, {name: 'Ember'}]
+
+            const JSLibrary = (props) => {
+                console.log('JSLibrary props-->', props);
+                const plusStyle = {
+                    color: 'green'
+                    , fontSize: '2em'
+                }
+                return (
+                    <div className="row">
+                        <div className="small-4 columns text-right cell-props padding-vert-large">
+                        0
+                        </div>
+                        <div className="small-4 columns text-left cell-props padding-vert-large">
+                            {props.libProps.name}
+                        </div>
+                        <div className="small-4 columns text-left cell-props padding-vert-small">
+                            <span className="icon icon-add" style={plusStyle}></span>
+                        </div>
+                    </div>
+                )
+            }
+
+            const JSLibraryContainer = (props) => {
+
+                const jsLibraries = props.jsLibraries.map((libName) => {
+                    return <JSLibrary key={libName.name} libProps={libName}></JSLibrary>
+                })
+
+                return (
+                    <div>
+                        <div className="row">
+                        <div className="small-6 small-centered columns text-center">
+                            <h1>Vote Your JS Library!</h1>
+                        </div>
+                        </div>
+                        <div className="row jsLibraryContainer">
+                        {jsLibraries}
+                        </div>
+                    </div>
+                )
+            }
+
+            ReactDOM.render(
+                (
+                    <JSLibraryContainer jsLibraries={jsLibraries}></JSLibraryContainer>
+                )
+                , container
+            )
+
+        </script>
+
+
+    </body>
+</html>
