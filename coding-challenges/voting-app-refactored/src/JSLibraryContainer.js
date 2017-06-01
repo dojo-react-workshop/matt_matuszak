@@ -6,27 +6,44 @@ class JSLibraryContainer extends Component {
     constructor(props) {
         super(props);
 
-        const jsLibraries = props.jsLibraries.map((lib) => {
-            return <JSLibrary key={lib.name} lib={lib} resort={this.sort}></JSLibrary>
+        const jsLibraries = new Map();
+        props.jsLibraries.forEach((val) => {
+            val.count = 0;
+            jsLibraries.set(val.name, val);
         })
-
         this.state = {
-            jsLibraries: jsLibraries
-        };
+            jsLibrariesMap: jsLibraries
+        }
+        // console.log('initialized js libraries', this.state);
     }
 
-    sort = () => {
-        const sortedLibraries = this.state.jsLibraries.sort((a, b) => {
-            return a.props.lib.getState().count < b.props.lib.getState().count;
-        });
-        const willBeNewState = this.state;
-        willBeNewState.jsLibraries = sortedLibraries;
-        this.setState(willBeNewState);
+    increment = (libName, incrementor) => {
+        const mutalableState = this.state;
+        this.state.jsLibrariesMap.get(libName).count = this.state.jsLibrariesMap.get(libName).count + incrementor;
+        this.setState(mutalableState);
     }
 
     render() {
-        // console.log(this.state);
+        const jsLibraries = []
+        this.state.jsLibrariesMap.forEach((lib, key) => {
+            // console.log('Map Entry-->', lib);
+            const newJsLibEntry = (<JSLibrary key={key} lib={lib} increment={this.increment}></JSLibrary>);
+            // console.log('New js entry-->', newJsLibEntry)
+            jsLibraries.push( newJsLibEntry);
+        });
 
+        const sortedLibs = jsLibraries.sort((a,b) => {
+            if (a.props.lib.count < b.props.lib.count)
+                return 1;
+            else if (a.props.lib.count > b.props.lib.count)
+                return -1;
+            else
+                return a.props.lib.name > b.props.lib.name;
+        })
+
+        console.log('Sorted Libs -->', sortedLibs);
+
+        // console.log(jsLibraries);
 
         return (
             <div className="rootAppContainer">
@@ -36,7 +53,7 @@ class JSLibraryContainer extends Component {
                 </div>
                 </div>
                 <div className="row jsLibraryContainer">
-                {this.state.jsLibraries}
+                {sortedLibs}
                 </div>
             </div>
         );

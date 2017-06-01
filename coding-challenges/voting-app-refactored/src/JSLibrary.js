@@ -5,34 +5,37 @@ class JSLibrary extends Component {
 
     constructor(props) {
         super(props);
-        // console.log('JSLibrary constructor-->', props);
+
+        // console.log('JSLibrary -->', props);
+        this.name = props.lib.name;
         this.state = {
-                name: props.lib.name
-                , count: 0
+         count: props.lib.count
         };
-        props.lib.getState = this.getState;
     }
 
-    getState = () => {
-        return this.state;
+    /*
+    complements of stacktrace and reactjs docs
+    https://stackoverflow.com/questions/41582197/state-not-updating-when-receiving-new-props-reactjs
+    https://facebook.github.io/react/docs/react-component.html#componentwillreceiveprops
+    */
+    componentWillReceiveProps(nextProps) {
+        // console.log('Next Props-->', nextProps, this.props, this.state);
+        if (this.state.count !== nextProps.lib.count) {
+            this.setState({
+                count: nextProps.lib.count
+            })
+        }
     }
 
     increment = () => {
-        let stateSnapshot = this.state;
-        stateSnapshot.count = stateSnapshot.count + 1;
-        this.setState(stateSnapshot);
-        this.props.resort();
+        this.props.increment(this.name, 1);
     }
 
     decrement = () => {
-        let stateSnapshot = this.state;
-        stateSnapshot.count = stateSnapshot.count - 1;
-        this.setState(stateSnapshot);
-        this.props.resort();
+        this.props.increment(this.name, -1);
     }
 
     render() {
-        // console.log('JSLibrary props-->', this.state);
         const plusStyle = {
             color: 'green'
             , fontSize: '3em'
@@ -44,10 +47,10 @@ class JSLibrary extends Component {
         return (
             <div className="row libraryRow">
                 <div className="small-4 columns text-center cell-props padding-vert-large counter">
-                {this.state.count}
+                    {this.state.count}
                 </div>
                 <div className="small-4 columns text-left cell-props padding-vert-large libraryName">
-                    {this.state.name}
+                    {this.name}
                 </div>
                 <div className="small-4 columns text-center cell-props padding-vert-small">
                     <span className="icon icon-expand" style={plusStyle} onClick={this.increment}></span>
