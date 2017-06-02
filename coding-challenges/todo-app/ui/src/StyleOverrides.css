@@ -1,0 +1,22 @@
+.app {
+    margin: auto;
+    max-width: 900px;
+    padding: 50px;
+}
+
+.app h1 {
+    font-size: 70px;
+    margin-bottom: 30px;
+}
+
+.listPadding {
+    padding: 0px;
+}
+
+.listMargin {
+    margin: 0px;
+}
+
+.itemsRemaining {
+    margin: 0px;
+}
