@@ -1,0 +1,40 @@
+.boardTable {
+    border: 1px solid black;
+    /*width: 100%;*/
+    display: table;
+}
+
+.boardRow {
+    display: table-row;
+}
+
+.boardCell {
+    display: table-cell;
+    padding: 5px;
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 30px;
+}
+
+.boardDiv {
+    display: table-cell;
+    padding: 15px;
+}
+
+.resultDiv h3 h2 {
+    margin: 0px;
+    padding: 0px;
+}
+
+.resultDiv {
+    display: table-cell;
+    padding: 15px;
+    vertical-align: top;
+}
+
+.appDiv {
+    display: table-row;
+}
