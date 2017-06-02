@@ -3,21 +3,21 @@ import Play from './Play';
 
 class Result extends Component {
 
-    constructor(props) {
-        console.log(`Result.constructor()-->`, props)
-        super(props);
-        this.state = {
-            history: [JSON.parse(JSON.stringify(this.props.boardState))]
-        }
-    }
+    // constructor(props) {
+    //     console.log(`Result.constructor()-->`, props)
+    //     super(props);
+    //     // this.state = {
+    //     //     history: [JSON.parse(JSON.stringify(this.props.boardState))]
+    //     // }
+    // }
 
     componentWillReceiveProps(nextProps) {
         console.log(`Result.componentWillReceiveProps()->`, nextProps);
-        const history = this.state.history;
-        history.push(JSON.parse(JSON.stringify(nextProps.boardState)));
-        this.setState({
-            history: history
-        })
+        // const history = this.state.history;
+        // history.push(JSON.parse(JSON.stringify(nextProps.boardState)));
+        // this.setState({
+        //     history: history
+        // })
     }
 
     rewind = (historyIndex) => {
@@ -27,9 +27,16 @@ class Result extends Component {
 
 
     render() {
+
+        // console.log('Result.render()-->plays', this.props.plays);
+
         const plays = [];
-        for (var i = 0; i < this.state.history.length; i++) {
-            plays.push(<Play key={i} historyIndex={i} postBoardState={this.state.history[i]} rewind={this.rewind}></Play>)
+        // for (var i = 0; i < this.state.history.length; i++) {
+        //     plays.push(<Play key={i} historyIndex={i} postBoardState={this.state.history[i]} rewind={this.rewind}></Play>)
+        // }
+
+        for (var i = 0; i < this.props.plays.length; i++) {
+            plays.push(<Play key={i} historyIndex={i} playDetails={this.props.plays[i]} rewind={this.rewind}></Play>)
         }
 
         const player = (this.props.boardState.gameOver)
