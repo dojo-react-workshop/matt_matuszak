@@ -14,6 +14,8 @@ class Form extends Component {
         console.log('adding item', this.state.todo)
         this.props.addTodoItem(this.state.todo);
         event.preventDefault();
+        this.setState({todo: ''})
+        this.refs.todoInput.value = ''
     }
 
     updateTodoText = (event) => {
@@ -25,7 +27,7 @@ class Form extends Component {
             <div className="row">
                 <span className="icon icon-caret-down medium-1 columns valign-middle text-dark-grey text-center" style={{fontSize: '2em'}}></span>
                 <form onSubmit={this.add}>
-                    <input type="text" className="medium-11 columns" placeholder="What needs to be done?" onChange={this.updateTodoText}></input>
+                    <input type="text" className="medium-11 columns" placeholder="What needs to be done?" onChange={this.updateTodoText} ref="todoInput"></input>
                     {/* <input type="submit" style="display: none" /> */}
                 </form>
                 <hr />
