@@ -75,8 +75,8 @@ class App extends Component {
     render() {
         return (
             <div className="appDiv">
-                <Board key={'BoardRoot'} grid={this.state.grid} selectCell={this.selectCell} rewindBoard={this.rewindBoard}></Board>
-                <Result key={'ResultRoot'} boardState={this.state}></Result>
+                <Board key={'BoardRoot'} grid={this.state.grid} selectCell={this.selectCell}></Board>
+                <Result key={'ResultRoot'} boardState={this.state} rewindBoard={this.rewindBoard}></Result>
             </div>
         );
     }
