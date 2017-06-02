@@ -31,7 +31,10 @@ class App extends Component {
             , selectPlayer: null
             , currentPlayer: this.X
             , gameOver: false
+            , history: []
         }
+
+        this.state.history.push(this.state)
     }
 
     rewindBoard = (historyIndex) => {
@@ -63,11 +66,21 @@ class App extends Component {
                 }
             }
 
+            const newHistory = this.state.history;
+            console.log('history before', newHistory)
+            newHistory.push(JSON.parse(JSON.stringify(this.state, (key, value)=> {
+                if (key=="history1") return undefined;
+                else return value;
+            })));
+            console.log('history after', newHistory)
+
+
             this.setState({
                 grid: newGrid
                 , selectPlayer: this.state.currentPlayer
                 , currentPlayer: ((this.state.currentPlayer.id ==='X'?this.O:this.X))
                 , gameOver: gameOver
+                , history: newHistory
             });
         }
     }
