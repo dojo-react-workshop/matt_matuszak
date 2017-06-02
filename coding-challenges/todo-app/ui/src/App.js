@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import TodoForm from './Form';
-import TodoList from './List';
+import Todo from './Todo';
 import TodoFilter from './Filter';
 import StyleOverrides from './StyleOverrides.css'
 
@@ -9,27 +9,61 @@ class App extends Component {
     constructor(props) {
         super(props);
 
+        const defaultList = [this.constructTodo('go fishing'), this.constructTodo('go hunting'), this.constructTodo('mow lawn')];
+        defaultList.push(this.constructTodo('Already done??'))
+        defaultList[defaultList.length-1].completed = true;
+
+        const activeTodos = this.countActives(defaultList);
         this.state = {
-            todoList: [this.constructTodo('go fishing'), this.constructTodo('go hunting'), this.constructTodo('mow lawn')]
+            todoList: defaultList
+            , activeCount: activeTodos
         }
+    }
+
+    countActives = (todoList) => {
+        return todoList.reduce((count, todo) => {
+            return (todo.completed === false) ? count+1 : count ;
+        }, 0)
     }
 
     constructTodo = (text) => {
         return { completed: false, name: text, id: (Math.floor(Math.random() * 10000))}
     }
 
+    updateTaskCompletionState = (id, state) => {
+        const todoList = this.state.todoList;
+
+        todoList.forEach((todo) => {
+            if (todo.id === id) {
+                todo.completed = state;
+            }
+        })
+        this.setState({todoList: todoList, activeCount: this.countActives(todoList)});
+    }
+
+    updateTaskName = (id, name) => {
+        const todoList = this.state.todoList;
+
+        todoList.forEach((todo) => {
+            if (todo.id === id) {
+                todo.name = name;
+            }
+        })
+        this.setState({todoList: todoList});
+    }
+
     addTodoItem = (todoText) => {
         const todoList = this.state.todoList;
         todoList.push(this.constructTodo(todoText));
         this.setState({
-            TodoList: todoList
+            todoList: todoList
         })
     }
 
     render() {
 
         const todoList = this.state.todoList.map((todo) => {
-            return <TodoList key={todo.id} details={todo} />
+            return <Todo key={todo.id} details={todo} updateTaskCompletionState={this.updateTaskCompletionState} updateTaskName={this.updateTaskName} />
         })
 
         return (
@@ -40,7 +74,7 @@ class App extends Component {
                 <div className="card">
                     <TodoForm addTodoItem={this.addTodoItem}/>
                     {todoList}
-                    <TodoFilter/>
+                    <TodoFilter activeCount={this.state.activeCount}/>
                 </div>
             </div>
         );

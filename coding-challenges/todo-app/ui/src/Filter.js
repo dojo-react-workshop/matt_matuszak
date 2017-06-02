@@ -5,7 +5,7 @@ class Filter extends Component {
         return (
             <div className="row">
                 <div className="medium-2 columns align-middle">
-                    <p className="valign-middle itemsRemaining">3 items left</p>
+                    <p className="valign-middle itemsRemaining">{this.props.activeCount} item(s) left</p>
                 </div>
                 <div className="medium-8 columns">
                     {/* <div className="row"> */}
