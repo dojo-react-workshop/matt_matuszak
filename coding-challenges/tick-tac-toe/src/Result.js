@@ -13,16 +13,25 @@ class Result extends Component {
 
     componentWillReceiveProps(nextProps) {
         console.log(`Result.componentWillReceiveProps()->`, nextProps);
-        const history = this.state.history;
-        history.push(JSON.parse(JSON.stringify(nextProps.boardState)));
-        this.setState({
-            history: history
-        })
+        if (!nextProps.boardState.rewinded) {
+            if (nextProps.boardState.resetHistoryIndex > -1) {
+                const currentHistory = this.state.history;
+                const newHistory = currentHistory.slice(0, nextProps.boardState.rewindedIndex + 1)
+                newHistory.push(JSON.parse(JSON.stringify(nextProps.boardState)));
+                this.setState({history: newHistory});
+            } else {
+                const history = this.state.history;
+                history.push(JSON.parse(JSON.stringify(nextProps.boardState)));
+                this.setState({
+                    history: history
+                })
+            }
+        }
     }
 
     rewind = (historyIndex) => {
         console.log(`Result.rewind(${historyIndex})`)
-        this.props.rewindBoard(historyIndex);
+        this.props.rewindBoard(this.state.history[historyIndex], historyIndex);
     }
 
 

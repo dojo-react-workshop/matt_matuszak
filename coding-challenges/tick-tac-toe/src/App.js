@@ -31,12 +31,16 @@ class App extends Component {
             , selectPlayer: null
             , currentPlayer: this.X
             , gameOver: false
+            , rewinded: false
+            , rewindedIndex: -1
         }
     }
 
-    rewindBoard = (historyIndex) => {
-        console.log(`App.rewindBoard(${historyIndex})`)
-
+    rewindBoard = (history, historyIndex) => {
+        console.log(`App.rewindBoard(${history})`, history)
+        history.rewinded = true;
+        history.rewindedIndex = historyIndex
+        this.setState(history)
     }
 
     selectCell = (item) => {
@@ -63,11 +67,16 @@ class App extends Component {
                 }
             }
 
+            const resetHistory = (this.state.rewinded) ? this.state.rewindedIndex : -1;
+
             this.setState({
                 grid: newGrid
                 , selectPlayer: this.state.currentPlayer
                 , currentPlayer: ((this.state.currentPlayer.id ==='X'?this.O:this.X))
                 , gameOver: gameOver
+                , rewinded: false
+                , resetHistoryIndex: resetHistory
+                // , (this.state.rewinded) ?
             });
         }
     }
@@ -75,8 +84,8 @@ class App extends Component {
     render() {
         return (
             <div className="appDiv">
-                <Board key={'BoardRoot'} grid={this.state.grid} selectCell={this.selectCell} rewindBoard={this.rewindBoard}></Board>
-                <Result key={'ResultRoot'} boardState={this.state}></Result>
+                <Board key={'BoardRoot'} grid={this.state.grid} selectCell={this.selectCell} ></Board>
+                <Result key={'ResultRoot'} boardState={this.state} rewindBoard={this.rewindBoard}></Result>
             </div>
         );
     }
