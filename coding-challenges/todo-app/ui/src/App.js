@@ -13,18 +13,18 @@ class App extends Component {
         defaultList.push(this.constructTodo('Already done??'))
         defaultList[defaultList.length-1].completed = true;
 
-        const activeTodos = this.countActives(defaultList);
-        this.state = {
-            filterOption: 'ALL'
-            , filteredList: defaultList
-            , todoList: defaultList
-            , activeCount: activeTodos
-        }
+        this.state = this.buildState('ALL', defaultList);
     }
 
     countActives = (todoList) => {
         return todoList.reduce((count, todo) => {
             return (todo.completed === false) ? count+1 : count ;
+        }, 0)
+    }
+
+    countCompleted = (todoList) => {
+        return todoList.reduce((count, todo) => {
+            return (todo.completed) ? count+1 : count ;
         }, 0)
     }
 
@@ -40,20 +40,16 @@ class App extends Component {
                 todo.completed = state;
             }
         })
-        this.setState({todoList: todoList, activeCount: this.countActives(todoList)});
+        this.setState(this.buildState(this.state.filterOption, todoList));
     }
 
     updateAllTaskCompletions = (completionState) => {
-        const todoList = this.applyFilter((completionState) ? 'ACTIVE' : 'COMPLETED');
-
-        todoList.filteredList.forEach((todo) => {
+        const currentList = this.state.todoList.map((todo) => {
             todo.completed = completionState;
+            return todo;
         })
 
-        const refiltered = this.applyFilter(this.state.filterOption);
-        refiltered.activeCount = 0;
-
-        this.setState(refiltered)
+        this.setState(this.buildState(this.state.filterOption, currentList))
     }
 
     updateTaskName = (id, name) => {
@@ -70,16 +66,45 @@ class App extends Component {
     addTodoItem = (todoText) => {
         const todoList = this.state.todoList;
         todoList.push(this.constructTodo(todoText));
-        this.setState({
-            todoList: todoList
-            , activeCount: this.countActives(todoList)
-        })
+        this.setState(this.buildState(this.state.filterOption, todoList))
     }
 
-    applyFilter = (filterOption) => {
-        let list = null;
+    deleteAt(list, index) {
+        list.splice(index, 1);
+        return list;
+    }
+
+    buildState = (filterOption = 'ALL', list = []) => {
+        return {
+            filterOption: filterOption
+            , filteredList: this.applyFilter(filterOption, list).filteredList
+            , todoList: list
+            , activeCount: this.countActives(list)
+            , completedCount: this.countCompleted(list)
+        }
+    }
+
+    deleteAllCompleted  = () => {
+        const todoList = this.state.todoList;
+        const newTodoList = [];
+
+        for(let i = 0; i < todoList.length; i++) {
+            if (!todoList[i].completed) {
+                newTodoList.push(todoList[i])
+            }
+        }
+
+        // const appliedFilter = this.applyFilter(this.state.filterOption, newTodoList)
+        // appliedFilter.activeCount = this.countActives(newTodoList);
+        // appliedFilter.completedCount = this.countCompleted(newTodoList);
+        this.setState(this.buildState(this.state.filterOption, newTodoList));
+
+    }
+
+    applyFilter = (filterOption, list = this.state.todoList) => {
+        // let list = null;
         if (filterOption === 'ALL') {
-            list = this.state.todoList
+            list = this.state.todoList;
         } else {
             list = this.state.todoList.filter((todo) => {
                 switch (filterOption) {
@@ -117,7 +142,7 @@ class App extends Component {
                 <div className="card">
                     <TodoForm updateAllTaskCompletions={this.updateAllTaskCompletions} addTodoItem={this.addTodoItem}/>
                     <hr />
-                    <TodoFilter activeCount={this.state.activeCount} filterTodoList={this.filterTodoList}/>
+                    <TodoFilter deleteAllCompleted={this.deleteAllCompleted} completedCount={this.state.completedCount} activeCount={this.state.activeCount} filterTodoList={this.filterTodoList}/>
                     <hr />
                     <div className="row">
                         <table className="table" role="grid">

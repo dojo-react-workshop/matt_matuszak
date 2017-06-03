@@ -28,6 +28,10 @@ class Filter extends Component {
 
     }
 
+    deleteAllCompleted = () => {
+        this.props.deleteAllCompleted();
+    }
+
     render() {
         return (
             <div className="row">
@@ -35,7 +39,7 @@ class Filter extends Component {
                     <span className="valign-middle itemsRemaining">{this.props.activeCount + ' '}
                         item(s) left</span>
                 </div>
-                <div className="medium-8 columns">
+                <div className="medium-7 columns">
                     {/* <div className="row"> */}
                     <ul className="button-group secondary tiny even-3">
                         <li className={this.state.allButton}>
@@ -50,8 +54,8 @@ class Filter extends Component {
                     </ul>
                     {/* </div> */}
                 </div>
-                <div className="medium-2 columns">
-                    <p>{''}</p>
+                <div className="medium-3 columns">
+                    <button onClick={this.deleteAllCompleted} className={'tiny' + ( (this.props.completedCount) ? '': ' disabled' ) }>Clear Completed</button>
                 </div>
             </div>
         )
