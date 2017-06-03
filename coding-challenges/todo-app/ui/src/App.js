@@ -15,7 +15,9 @@ class App extends Component {
 
         const activeTodos = this.countActives(defaultList);
         this.state = {
-            todoList: defaultList
+            filterOption: 'ALL'
+            , filteredList: defaultList
+            , todoList: defaultList
             , activeCount: activeTodos
         }
     }
@@ -57,12 +59,37 @@ class App extends Component {
         todoList.push(this.constructTodo(todoText));
         this.setState({
             todoList: todoList
+            , activeCount: this.countActives(todoList)
+        })
+    }
+
+    filterTodoList = (filterOption) => {
+
+        let list = null;
+        if (filterOption === 'ALL') {
+            list = this.state.todoList
+        } else {
+            list = this.state.todoList.filter((todo) => {
+                switch (filterOption) {
+                    case 'COMPLETED':
+                        return todo.completed;
+                    case 'ACTIVE':
+                        return !todo.completed;
+                    default:
+                        return true;
+                }
+            });
+        }
+
+        this.setState({
+            filterOption: filterOption
+            , filteredList: list
         })
     }
 
     render() {
 
-        const todoList = this.state.todoList.map((todo) => {
+        const todoList = this.state.filteredList.map((todo) => {
             return <Todo key={todo.id} details={todo} updateTaskCompletionState={this.updateTaskCompletionState} updateTaskName={this.updateTaskName} />
         })
 
@@ -74,9 +101,18 @@ class App extends Component {
                 <div className="card">
                     <TodoForm addTodoItem={this.addTodoItem}/>
                     <hr />
-                    {todoList}
+                    <TodoFilter activeCount={this.state.activeCount} filterTodoList={this.filterTodoList}/>
                     <hr />
-                    <TodoFilter activeCount={this.state.activeCount}/>
+                    <div className="row">
+                        <table className="table" role="grid">
+                            <thead>
+                                <tr><th>Completed</th><th>Task Name</th></tr>
+                            </thead>
+                            <tbody className="scrollable">
+                                {todoList}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         );

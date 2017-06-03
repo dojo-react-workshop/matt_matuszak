@@ -9,13 +9,17 @@
     margin-bottom: 30px;
 }
 
-.listPadding {
+.todoTable {
+    width: 100%
+}
+
+/*.listPadding {
     padding: 0px;
 }
 
 .listMargin {
     margin: 0px;
-}
+}*/
 
 .itemsRemaining {
     margin: 0px;

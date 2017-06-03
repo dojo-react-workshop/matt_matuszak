@@ -1,19 +1,53 @@
 import React, {Component} from 'react'
 
 class Filter extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            allButton: 'active',
+            activeButton: '',
+            completedButton: ''
+        }
+    }
+
+    allFilter = () => {
+        this.setState({allButton: 'active', activeButton: '', completedButton: ''})
+        this.props.filterTodoList('ALL');
+    }
+
+    activeFilter = () => {
+        this.setState({allButton: '', activeButton: 'active', completedButton: ''});
+        this.props.filterTodoList('ACTIVE');
+    }
+
+    completedFilter = () => {
+        this.setState({allButton: '', activeButton: '', completedButton: 'active'});
+        this.props.filterTodoList('COMPLETED');
+
+    }
+
     render() {
         return (
             <div className="row">
                 <div className="medium-2 columns align-middle">
-                    <p className="valign-middle itemsRemaining">{this.props.activeCount} item(s) left</p>
+                    <span className="valign-middle itemsRemaining">{this.props.activeCount}
+                        item(s) left</span>
                 </div>
                 <div className="medium-8 columns">
                     {/* <div className="row"> */}
-                        <ul className="button-group secondary">
-                            <li className="active"><button>All</button></li>
-                            <li><button>Active</button></li>
-                            <li><button>Completed</button></li>
-                        </ul>
+                    <ul className="button-group secondary tiny even-3">
+                        <li className={this.state.allButton}>
+                            <button onClick={this.allFilter}>All</button>
+                        </li>
+                        <li className={this.state.activeButton}>
+                            <button onClick={this.activeFilter}>Active</button>
+                        </li>
+                        <li className={this.state.completedButton}>
+                            <button onClick={this.completedFilter}>Completed</button>
+                        </li>
+                    </ul>
                     {/* </div> */}
                 </div>
                 <div className="medium-2 columns">
