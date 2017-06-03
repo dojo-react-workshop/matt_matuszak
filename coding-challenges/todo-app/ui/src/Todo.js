@@ -24,7 +24,6 @@ class Todo extends Component {
                     <div className="medium-11 columns listPadding">
                         <input type="text" value={this.props.details.name} onChange={this.updateName}/>
                     </div>
-                    <hr />
                 </div>
             </div>
         )

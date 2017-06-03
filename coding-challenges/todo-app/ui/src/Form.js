@@ -31,7 +31,6 @@ class Form extends Component {
                     <input type="text" className="medium-11 columns" placeholder="What needs to be done?" onChange={this.updateTodoText} ref="todoInput"></input>
                     {/* <input type="submit" style="display: none" /> */}
                 </form>
-                <hr />
             </div>
         )
     }

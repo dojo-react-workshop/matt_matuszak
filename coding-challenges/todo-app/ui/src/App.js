@@ -73,7 +73,9 @@ class App extends Component {
                 </div>
                 <div className="card">
                     <TodoForm addTodoItem={this.addTodoItem}/>
+                    <hr />
                     {todoList}
+                    <hr />
                     <TodoFilter activeCount={this.state.activeCount}/>
                 </div>
             </div>

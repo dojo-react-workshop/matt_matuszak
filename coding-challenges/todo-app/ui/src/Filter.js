@@ -10,7 +10,7 @@ class Filter extends Component {
                 <div className="medium-8 columns">
                     {/* <div className="row"> */}
                         <ul className="button-group secondary">
-                            <li><button>All</button></li>
+                            <li className="active"><button>All</button></li>
                             <li><button>Active</button></li>
                             <li><button>Completed</button></li>
                         </ul>
