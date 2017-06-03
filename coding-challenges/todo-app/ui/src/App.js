@@ -69,9 +69,16 @@ class App extends Component {
         this.setState(this.buildState(this.state.filterOption, todoList))
     }
 
-    deleteAt(list, index) {
-        list.splice(index, 1);
-        return list;
+    deleteTodo = (id) => {
+        const list = this.state.todoList;
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].id === id) {
+                list.splice(i,1);
+                break;
+            }
+        }
+
+        this.setState(this.buildState(this.state.filterOption, list));
     }
 
     buildState = (filterOption = 'ALL', list = []) => {
@@ -131,7 +138,7 @@ class App extends Component {
     render() {
 
         const todoList = this.state.filteredList.map((todo) => {
-            return <Todo key={todo.id} details={todo} updateTaskCompletionState={this.updateTaskCompletionState} updateTaskName={this.updateTaskName} />
+            return <Todo key={todo.id} details={todo} deleteTodo={this.deleteTodo} updateTaskCompletionState={this.updateTaskCompletionState} updateTaskName={this.updateTaskName} />
         })
 
         return (
@@ -147,7 +154,7 @@ class App extends Component {
                     <div className="row">
                         <table className="table" role="grid">
                             <thead>
-                                <tr><th>Completed</th><th>Task Name</th></tr>
+                                <tr><th>Completed</th><th>Task Name</th><th>{''}</th></tr>
                             </thead>
                             <tbody className="scrollable">
                                 {todoList}
