@@ -43,6 +43,19 @@ class App extends Component {
         this.setState({todoList: todoList, activeCount: this.countActives(todoList)});
     }
 
+    updateAllTaskCompletions = (completionState) => {
+        const todoList = this.applyFilter((completionState) ? 'ACTIVE' : 'COMPLETED');
+
+        todoList.filteredList.forEach((todo) => {
+            todo.completed = completionState;
+        })
+
+        const refiltered = this.applyFilter(this.state.filterOption);
+        refiltered.activeCount = 0;
+
+        this.setState(refiltered)
+    }
+
     updateTaskName = (id, name) => {
         const todoList = this.state.todoList;
 
@@ -63,8 +76,7 @@ class App extends Component {
         })
     }
 
-    filterTodoList = (filterOption) => {
-
+    applyFilter = (filterOption) => {
         let list = null;
         if (filterOption === 'ALL') {
             list = this.state.todoList
@@ -81,10 +93,14 @@ class App extends Component {
             });
         }
 
-        this.setState({
+        return {
             filterOption: filterOption
             , filteredList: list
-        })
+        }
+    }
+
+    filterTodoList = (filterOption) => {
+        this.setState(this.applyFilter(filterOption));
     }
 
     render() {
@@ -99,7 +115,7 @@ class App extends Component {
                     <h1>todos</h1>
                 </div>
                 <div className="card">
-                    <TodoForm addTodoItem={this.addTodoItem}/>
+                    <TodoForm updateAllTaskCompletions={this.updateAllTaskCompletions} addTodoItem={this.addTodoItem}/>
                     <hr />
                     <TodoFilter activeCount={this.state.activeCount} filterTodoList={this.filterTodoList}/>
                     <hr />

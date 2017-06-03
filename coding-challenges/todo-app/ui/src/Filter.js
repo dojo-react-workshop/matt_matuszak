@@ -32,7 +32,7 @@ class Filter extends Component {
         return (
             <div className="row">
                 <div className="medium-2 columns align-middle">
-                    <span className="valign-middle itemsRemaining">{this.props.activeCount}
+                    <span className="valign-middle itemsRemaining">{this.props.activeCount + ' '}
                         item(s) left</span>
                 </div>
                 <div className="medium-8 columns">
