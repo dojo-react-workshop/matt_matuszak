@@ -75,6 +75,9 @@ class App extends Component {
     }
 
     buildState = (filterOption = 'ALL', list = []) => {
+
+        const appliedFilterToList = this.applyFilter(filterOption, list).filteredList;
+
         return {
             filterOption: filterOption
             , filteredList: this.applyFilter(filterOption, list).filteredList
@@ -94,9 +97,6 @@ class App extends Component {
             }
         }
 
-        // const appliedFilter = this.applyFilter(this.state.filterOption, newTodoList)
-        // appliedFilter.activeCount = this.countActives(newTodoList);
-        // appliedFilter.completedCount = this.countCompleted(newTodoList);
         this.setState(this.buildState(this.state.filterOption, newTodoList));
 
     }
@@ -104,9 +104,9 @@ class App extends Component {
     applyFilter = (filterOption, list = this.state.todoList) => {
         // let list = null;
         if (filterOption === 'ALL') {
-            list = this.state.todoList;
+            // list = this.state.todoList;
         } else {
-            list = this.state.todoList.filter((todo) => {
+            list = list.filter((todo) => {
                 switch (filterOption) {
                     case 'COMPLETED':
                         return todo.completed;
@@ -125,7 +125,7 @@ class App extends Component {
     }
 
     filterTodoList = (filterOption) => {
-        this.setState(this.applyFilter(filterOption));
+        this.setState(this.buildState(filterOption, this.state.todoList));
     }
 
     render() {
