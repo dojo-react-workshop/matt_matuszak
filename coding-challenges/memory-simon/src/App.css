@@ -2,3 +2,15 @@
     max-width: 900px;
     margin: auto;
 }
+
+.showColor {
+    background-color: #FFB81C;
+}
+
+.green {
+    background-color: #16B161;
+}
+
+.yellow {
+    background-color: #EC544A;
+}

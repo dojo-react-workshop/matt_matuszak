@@ -6,7 +6,7 @@ class GameAction extends Component {
         super(props);
 
         this.state = {
-            countDownClock: 5
+            countDownClock: 2
             , gameState: this.props.state
         }
     }
@@ -19,17 +19,19 @@ class GameAction extends Component {
     }
 
     componentDidUpdate()  {
-        console.log('GameAction.componentDidUpdate()', this.state);
+        // console.log('GameAction.componentDidUpdate()', this.state);
         if (this.state.countDownClock <= 0 && this.state.gameState === 'START_GAME') {
             this.props.showRandomizedBoard();
-            // this.setState({countDownClock: 5})
+            this.setState({countDownClock: 2})
         } else if (this.state.countDownClock <= 0 && this.state.gameState === 'DISPLAY_RANDOM') {
             this.props.hideBoard();
-            // this.setState({countDownClock: 5})
+            this.setState({countDownClock: 15})
+        } else if (this.state.countDownClock <= 0 && this.state.gameState === 'HIDDEN_BOARD') {
+            this.props.gameOver();
         }
     }
     render() {
-        console.log('GameAction.render()', this.props, this.state.gameState)
+        // console.log('GameAction.render()', this.props, this.state.gameState)
         let actionAvailableContent = <div>Should not see this</div>;
         switch (this.state.gameState) {
             case 'DEFAULT':
@@ -66,13 +68,30 @@ class GameAction extends Component {
 
                 break;
             case 'HIDDEN_BOARD':
-                actionAvailableContent = <p>Make your guesses!</p>
+                if (this.state.countDownClock > 0) {
+                    setTimeout(() => {
+                        this.setState({
+                            countDownClock: (this.state.countDownClock -1)
+                        })
+                    }, 1000);
+                    actionAvailableContent = <p>Make your guesses!  You have {this.state.countDownClock} seconds(s) left...</p>
+                }
+
+                break;
+            case 'GAME_OVER':
+                actionAvailableContent = (
+                    <div>
+                        <p>Time is up! {(this.props.winner) ? 'You are a winner!!' : 'You are a loser!!'}</p>
+                        <button onClick={this.props.playAgain} className="tiny margin-top-medium">Play Again</button>
+                    </div>
+            );
+
                 break;
             default:
                 actionAvailableContent = <div>Oh no</div>;
         }
 
-        console.log('GameAction.render()', actionAvailableContent)
+        // console.log('GameAction.render()', actionAvailableContent)
 
         return (
             <div>

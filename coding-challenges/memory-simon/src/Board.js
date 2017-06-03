@@ -6,7 +6,7 @@ class Board extends Component {
     render() {
 
         const cards = this.props.cardData.map((card) => {
-            return <Card key={card.id} data={card} />
+            return <Card key={card.id} data={card} boardState={this.props.boardState} selectCard={this.props.selectCard} />
         })
 
         const cardRow1 = cards.splice(0,4);
