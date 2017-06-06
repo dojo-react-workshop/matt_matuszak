@@ -1,28 +1,27 @@
 import React, {Component} from 'react'
 import BasicUserInfo from './BasicUserInfo'
+import PropTypes from 'prop-types';
 
-class UserSearchResults extends Component {
+const UserSearchResults = (props) => {
 
+    const userInfoList = props.users.map((user, index) => {
+        return <BasicUserInfo key={index} user={user}/>
+    });
 
-    render() {
-        return (
-            <div className="grid-container">
-                <div className="row">
-                    <div className="small-12 columns">
-
-                        {
-                            ([0,1,2,3,4,5,6,7,8,9]).map((val, index) => {
-                                return (
-                                    <BasicUserInfo key={index} />
-                                )
-                            })
-                        }
-                    </div>
-
+    return (
+        <div className="grid-container">
+            <div className="row">
+                <div className="small-12 columns">
+                    {userInfoList}
                 </div>
+
             </div>
-        )
-    }
+        </div>
+    )
+}
+
+UserSearchResults.propTypes = {
+    users: PropTypes.array.isRequired
 }
 
 export default UserSearchResults

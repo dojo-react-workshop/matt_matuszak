@@ -1,23 +1,28 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types';
 
-class BasicUserInfo extends Component {
+const BasicUserInfo = (props) => {
 
+    return (
+        <ul className="vcard">
+            <li>
+                <a href={props.user.html_url}>{props.user.login}</a>
+            </li>
+            <li>
+                <img src={props.user.avatar_url} style={{
+                    width: '50px'
+                }}></img>
+            </li>
+        </ul>
+    )
+}
 
-    render() {
-        return (
-            <ul className="vcard">
-                <li>
-                    <a href="https://github.com/mattmatuszak">Andy Schneider</a>
-                </li>
-                <li>Login: mattmatuszak</li>
-                <li>
-                    <img src="https://avatars2.githubusercontent.com/u/7598330?v=3" style={{
-                        width: '50px'
-                    }}></img>
-                </li>
-            </ul>
-        )
-    }
+BasicUserInfo.propTypes = {
+    user: PropTypes.shape({
+        html_url: PropTypes.string.isRequired
+        , login: PropTypes.string.isRequired
+        , avatar_url: PropTypes.string.isRequired
+    }).isRequired
 }
 
 export default BasicUserInfo
