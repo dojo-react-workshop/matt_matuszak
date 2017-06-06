@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 
 const UserSearchResults = (props) => {
 
-    const userInfoList = props.users.map((user, index) => {
+    let userInfoList = props.users.map((user, index) => {
         return <BasicUserInfo key={index} user={user}/>
     });
+
+    if (userInfoList.length === 0) {
+        userInfoList = <h3>Please enter a search in the form</h3>
+    }
 
     return (
         <div className="grid-container">

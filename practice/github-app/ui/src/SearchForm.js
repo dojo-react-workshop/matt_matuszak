@@ -19,6 +19,8 @@ class SearchForm extends Component {
     }
 
     render() {
+        const buttonClasses = 'postfix' + ((this.state.searchQuery === '') ? ' disabled' : '');
+
         return (
                 <form onSubmit={this.executeSearch}>
                     <div className="small-12 large-12 columns small-centered">
@@ -35,7 +37,7 @@ class SearchForm extends Component {
                         <input type="text" name="searchQuery" className="with-prefix with-postfix" onChange={this.formDataChange} placeholder="Enter Search Criteria"/>
                     </div>
                     <div className="small-2 large-2 columns">
-                        <button type="submit" className="postfix">Search</button>
+                        <button type="submit" className={buttonClasses}>Search</button>
                     </div>
                 </form>
         )
