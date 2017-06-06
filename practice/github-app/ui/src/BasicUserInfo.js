@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 
 const BasicUserInfo = (props) => {
 
     return (
         <ul className="vcard">
             <li>
-                <a href={props.user.html_url}>{props.user.login}</a>
+                <Link to={`/${props.user.login}/details`}>Details: {props.user.login}</Link>
             </li>
+            <li><a href={props.user.html_url} target="_blank">{props.user.login} on Github</a></li>
             <li>
                 <img src={props.user.avatar_url} style={{
                     width: '50px'

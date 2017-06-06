@@ -8,8 +8,10 @@ const UserSearchResults = (props) => {
         return <BasicUserInfo key={index} user={user}/>
     });
 
-    if (userInfoList.length === 0) {
+    if (userInfoList.length === 0 && !props.searched) {
         userInfoList = <h3>Please enter a search in the form</h3>
+    } else if (userInfoList.length === 0 && props.searched) {
+        userInfoList = <h3>No results found! Please enter a new search criteria</h3>
     }
 
     return (
@@ -25,7 +27,8 @@ const UserSearchResults = (props) => {
 }
 
 UserSearchResults.propTypes = {
-    users: PropTypes.array.isRequired
+    users: PropTypes.array.isRequired,
+    searched: PropTypes.bool.isRequired
 }
 
 export default UserSearchResults
