@@ -5,20 +5,30 @@ import UserSearchResults from './UserSearchResults'
 import UserDetails from './UserDetails'
 
 class App extends Component {
+
+
+    executeSearch = (searchParams) => {
+        console.log('Search Executed!', searchParams)
+    }
+
+
+
     render() {
         return (
             <div className="app">
 
                 <div className="row">
                     <div className="small-12 medium-12 columns">
-                        <SearchForm />
+                        <SearchForm executeSearch={this.executeSearch} />
                     </div>
+                    <hr />
                 </div>
 
                 <div className="row">
                     <div className="small-12 medium-12 columns">
                         <UserSearchResults />
                     </div>
+                    <hr />
                 </div>
 
                 <div className="row">

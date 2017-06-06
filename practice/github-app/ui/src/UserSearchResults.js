@@ -11,19 +11,9 @@ class UserSearchResults extends Component {
                     <div className="small-12 columns">
 
                         {
-                            ([0,1,2,3,4,5,6,7,8,9]).map((val) => {
+                            ([0,1,2,3,4,5,6,7,8,9]).map((val, index) => {
                                 return (
-                                    <ul className="vcard">
-                                        <li>
-                                            <a href="https://github.com/mattmatuszak">Andy Schneider</a>
-                                        </li>
-                                        <li>Login: mattmatuszak</li>
-                                        <li>
-                                            <img src="https://avatars2.githubusercontent.com/u/7598330?v=3" style={{
-                                                width: '50px'
-                                            }}></img>
-                                        </li>
-                                    </ul>
+                                    <BasicUserInfo key={index} />
                                 )
                             })
                         }
