@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>State Machine Example</title>
+        <link rel="stylesheet" href="https://uitk.learnvest.com/v/1.16.0/css/nm/fonts.css" />
+        <link rel="stylesheet" href="https://uitk.learnvest.com/v/1.16.0/css/nm/icons.css" />
+        <link rel="stylesheet" href="https://uitk.learnvest.com/v/1.16.0/css/nm/main.css" />
+        <script type="text/javascript">
+        'use strict';
+
+        function createStore(myreducer) {
+
+            const listeners = [];
+            const reducer = myreducer;
+            let state = reducer({}, {})
+
+            return {
+                getState: () => {
+                    return Object.assign({}, state);
+                }
+                , subscribe: (callback) => {
+                    listeners.push(callback);
+                }
+                , dispatch: (action) => {
+                    state = reducer(state, action);
+                    listeners.forEach((callback) => {
+                        callback();
+                    })
+                }
+            }
+        }
+        </script>
+    </head>
+    <body>
+
+        <h1>Create my own redux</h1>
+
+        <div class="row">
+            <div class="small-12 columns">
+
+                <div>
+                    <h2 id='counter'></h2>
+                </div>
+
+                <button onclick="increment()">Increment</button>
+                <button onclick="decrement()">Decrement</button>
+            </div>
+        </div>
+
+        <script>
+        'use strict';
+
+
+        const reducer = (currentState, action) => {
+            const newState = Object.assign({}, currentState);
+
+            switch (action.type) {
+                case 'increment':
+                    newState.count += 1
+                    break;
+                case 'decrement':
+                    newState.count -= 1
+                    break;
+                default:
+                    newState.count = 0;
+
+            }
+
+            return newState;
+        }
+        const store = createStore(reducer);
+
+        // let counter = 0;
+
+        function increment() {
+            console.log('increment')
+            store.dispatch({type: 'increment'})
+            // counter += 1;
+            // render();
+        }
+
+        function decrement() {
+            console.log('decrement')
+            store.dispatch({type: 'decrement'})
+            // counter -= 1;
+            // render();
+        }
+
+        const render = () => {
+            document.getElementById('counter').innerHTML = store.getState().count;
+        }
+
+        store.subscribe(render)
+        store.dispatch({type: 'init'})
+
+        </script>
+
+    </body>
+</html>
