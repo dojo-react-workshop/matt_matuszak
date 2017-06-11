@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import dateFormat from 'dateformat';
 
-const Todo = (props) => {
+const TodoItem = (props) => {
 
     function todoChange(event) {
         props.dispatch({type: 'TODO_TOGGLE', id: props.id, completed: event.target.checked})
@@ -19,4 +19,4 @@ const Todo = (props) => {
     );
 }
 
-export default connect()(Todo)
+export default connect()(TodoItem)

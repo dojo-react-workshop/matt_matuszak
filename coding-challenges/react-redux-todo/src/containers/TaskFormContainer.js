@@ -31,8 +31,14 @@ class TaskFormContainer extends React.Component {
         return (
                 <div>
                     <form onSubmit={this.submit}>
-                        <input type="text" name="task" placeholder="enter new task" value={this.state.task} onChange={this.formChange} />
-                        <button type="submit">Add</button>
+                        <input
+                            type="text"
+                            name="task"
+                            placeholder="enter new task"
+                            value={this.state.task}
+                            onChange={this.formChange}
+                            className="inline"/>
+                        <button className="inline" type="submit">Add</button>
                     </form>
                 </div>
         );

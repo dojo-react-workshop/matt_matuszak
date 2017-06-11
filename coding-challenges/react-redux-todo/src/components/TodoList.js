@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Todo from '../containers/TodoContainer'
+import TodoItem from './redux/TodoItem'
 
 const TodoList = ({todos}) => {
 
@@ -22,7 +22,7 @@ const TodoList = ({todos}) => {
                         <tbody>
                             {
                                 todos.map((todo) => {
-                                    return <Todo key={todo.id} {...todo} />
+                                    return <TodoItem key={todo.id} {...todo} />
                                 })
                             }
                         </tbody>
