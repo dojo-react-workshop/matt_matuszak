@@ -6,11 +6,18 @@ const FilterContainer = (props) => {
 
     console.log('FilterContainer() -->', props)
     return (
-        <ul className="button-group tiny secondary">
-            <FilterItem {...props} option="All" />
-            <FilterItem {...props} option="Active" />
-            <FilterItem {...props} option="Completed" />
-        </ul>
+        <div className='gridContainer'>
+            <div className="row">
+                <div className="small-4 columns small-centered">
+                    <ul className="button-group tiny secondary">
+                        <FilterItem {...props} option="All" />
+                        <FilterItem {...props} option="Active" />
+                        <FilterItem {...props} option="Completed" />
+                    </ul>
+                </div>
+            </div>
+
+        </div>
     );
 }
 
