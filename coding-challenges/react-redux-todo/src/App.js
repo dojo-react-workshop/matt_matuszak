@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import TaskForm from './components/TaskForm'
 import FilterContainer from './containers/FilterContainer'
-import TodoListContainer from './containers/TodoListContainer'
+import TodoList from './components/TodoList'
 
 class App extends Component {
     render() {
@@ -11,7 +11,7 @@ class App extends Component {
                 <h1>Todos App</h1>
                 <TaskForm />
                 <FilterContainer />
-                <TodoListContainer />
+                <TodoList />
             </div>
         );
     }

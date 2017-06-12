@@ -1,8 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import TaskService from '../services/TodoService'
+
 class TaskForm extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.taskService = new TaskService();
+    }
 
     state = {
         task: ''
@@ -17,14 +23,22 @@ class TaskForm extends React.Component {
     submit = (event) => {
         event.preventDefault();
         console.log('TaskFormContainer.submit()-->', this.props.state)
-        this.props.dispatch({
-            type: 'TODO_ADD'
-            , text: this.state.task
-        })
 
-        this.setState({
-            task: ''
-        })
+        this.taskService.addTodo(this.state.task)
+            .then(response => {
+                // console.log('Yea, it worked!', response.data);
+                this.props.dispatch({
+                    type: 'TODO_CREATED'
+                    , todo: response.data
+                })
+
+                this.setState({
+                    task: ''
+                })
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     render() {

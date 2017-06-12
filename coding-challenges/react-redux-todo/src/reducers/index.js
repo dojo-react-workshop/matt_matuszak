@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 
-import { Todo as TodoReducer } from './Todo'
 import { Filter as FilterReducer } from './Filter'
+import { Todo as TodoReducer } from './Todo'
 
 
 export const appReducers = combineReducers({
-    todos: TodoReducer
-    , filter: FilterReducer
+    filter: FilterReducer
+    , todos: TodoReducer
 })
