@@ -37,12 +37,17 @@ class TodoList extends React.Component {
         console.log('TodoList.componentWillReceiveProps() nextProps-->', nextProps)
         if (this.props.filter !== nextProps.filter) {
             this.retrieveAndUpdateTodos(nextProps.filter)
+        } else if (nextProps.newTodo !== null) {
+            console.log('TodoList.componentWillReceiveProps() newTodo -->', nextProps.newTodo)
+            const willBeNewStateTodos = this.state.todos;
+            willBeNewStateTodos.push(nextProps.newTodo);
+            this.setState({todos: willBeNewStateTodos})
         }
     }
 
 
     render() {
-        console.log('TodoList.render() state-->', this.state)
+        console.log('TodoList.render() props-->', this.props)
 
         let todoItemListToShow = this.state.todos;
         if (this.state.errorRetrievingTodos) {
@@ -91,6 +96,7 @@ class TodoList extends React.Component {
 const mapStateToProps = (state) => {
     return {
         filter: state.filter
+        , newTodo: state.todos.createdTodo
     }
 }
 

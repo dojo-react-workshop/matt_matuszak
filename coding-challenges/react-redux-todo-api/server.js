@@ -32,6 +32,18 @@ app.get('/api/todos', (request, response) => {
             break;
         default: response.json(todos);
     }
+});
+
+app.post('/api/todos', (request, response) => {
+    console.log(request.body);
+    const newTodo = {
+        id: Math.floor(Math.random()*10000000)
+        , completed: false
+        , text: request.body.text
+        , date: new Date()
+    }
+    todos.push(newTodo)
+    response.json(newTodo)
 })
 
 
